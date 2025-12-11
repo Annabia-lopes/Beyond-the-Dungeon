@@ -669,7 +669,7 @@ class Game:
         self.ranking_ui = RankingUI(VIRTUAL_WIDTH, VIRTUAL_HEIGHT)
         self.mensagem_acao = ""
         self.mensagem_timer = 0
-        self.chance_combate = 0.025 # AUMENTADO (era 0.008)
+        self.chance_combate = 0.015
         self.tempo_inicio = None
         self.inimigos_mortos = 0
         self.delta_time = 0
@@ -730,7 +730,8 @@ class Game:
         if self.transition_timer <= 0:
             self.dungeon_index += 1
             self.load_dungeon()
-            self.state = GameState.PLAYING
+            if self.state != GameState.VICTORY:
+                self.state = GameState.PLAYING
 
     def handle_paused(self, keys):
         if self.input_manager.is_key_pressed(pygame.K_ESCAPE):
